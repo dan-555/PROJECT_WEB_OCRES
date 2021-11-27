@@ -3,6 +3,8 @@ import EthDatas from '../EthDatas/EthDatas';
 import EthChart from '../EthChart/EthChart';
 import  '../../GlobalCss/Card.css';
 
+import Metamask from '../Metamask/Metamask';
+
 export default function Widgets() {
     return(
 
@@ -21,6 +23,10 @@ export default function Widgets() {
 
             <div className="col">
                 <EthDatas/>
+            </div>
+
+            <div className="col">
+                <Metamask/>
             </div>
 
            

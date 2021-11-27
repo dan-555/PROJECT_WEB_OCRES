@@ -17,13 +17,12 @@ export default function Widgets() {
                 <EthDatas/>
             </div>
 
+
             <div className="col">
                 <EthChart/>
             </div>
 
-            <div className="col">
-                <EthDatas/>
-            </div>
+
 
             <div className="col">
                 <Metamask/>

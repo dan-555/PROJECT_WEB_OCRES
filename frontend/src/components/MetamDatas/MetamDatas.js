@@ -40,28 +40,25 @@ export default function MetamDatas(props) {
                             <div className="row align-items-center">
 
                                 <div className={classNames("col-9", MetamDatasStyle.crypto)}>
-                                 Fast Gas Price : {props.dataGas.result.FastGasPrice} gwei
+                                 Fast Gas Price : {props.dataGas.result.FastGasPrice} 
                                 </div>
-                            </div>
 
-                        </ListGroup.Item>
-
-                        <ListGroup.Item>
-                            <div className="row align-items-center">
+                                <br></br><br></br>
 
                                 <div className={classNames("col-9", MetamDatasStyle.crypto)}>
-                                 Proposed Gas Price : {props.dataGas.result.ProposedGasPrice} gwei
+                                 Proposed Gas Price : {props.dataGas.result.ProposeGasPrice} 
                                 </div>
-                            </div>
 
-                        </ListGroup.Item>
-
-                        <ListGroup.Item>
-                            <div className="row align-items-center">
+                                <br></br><br></br>
 
                                 <div className={classNames("col-9", MetamDatasStyle.crypto)}>
-                                 Safe Gas Price : {props.dataGas.result.SafeGasPrice} gwei
+                                 Safe Gas Price : {props.dataGas.result.SafeGasPrice} 
                                 </div>
+
+                                <br></br><br></br>
+
+                                <div>(fee in gwei)</div>
+
                             </div>
 
                         </ListGroup.Item>

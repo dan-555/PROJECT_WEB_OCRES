@@ -1,15 +1,37 @@
 import React from 'react';
-import  {Card ,ListGroup} from 'react-bootstrap';
+import  {Card ,InputGroup,FormControl, ListGroup, Button} from 'react-bootstrap';
 import MetamDatasStyle from './MetamDatasStyle.css';
 import classNames from 'classnames';
 
 
 export default function MetamDatas(props) {
-    //var Newprice = Math.round(props.data[0].price * 100) / 100;
+    var Newprice = props.dataBalance.result * 0.000000000000000001;
 
-   console.log(props.dataBalance);
+  /* console.log(props.dataBalance);
    console.log(props.dataGas);
-   console.log(props.dataTime);
+   console.log(props.dataTime); */ //test
+
+
+
+   function check()
+   {
+           var adrsToCheck,
+           element = document.getElementById('adrs');
+
+           //console.log(element.value);
+
+           if (element !== null) {                            
+               adrsToCheck = element.value; 
+
+            //   console.log(adrsToCheck);
+               props.setAddress(adrsToCheck);
+               props.fetch();
+           }
+           else {
+               adrsToCheck = null;
+               console.log("element is null");
+           }
+   }
 
     return( 
 
@@ -19,8 +41,23 @@ export default function MetamDatas(props) {
                     <ListGroup.Item>
                             <div className="row align-items-center">
 
+                                <div className="ethScanTitle">Scan ETH Wallet : <br></br> </div>
+
+                            <InputGroup className="mb-3">
+                                <InputGroup.Text id="basic-addon1">#</InputGroup.Text>
+                                <FormControl id="adrs" placeholder="Address" aria-label="Address" aria-describedby="basic-addon1"/>
+                                <Button  id="button-addon2" onClick={check}>Check</Button>
+                            </InputGroup>
+
+                            </div>
+
+                        </ListGroup.Item>
+
+                    <ListGroup.Item>
+                            <div className="row align-items-center">
+
                                 <div className={classNames("col-9", MetamDatasStyle.crypto)}>
-                                BALANCE : {props.dataBalance.result} 
+                                ETH BALANCE : {Newprice} 
                                 </div>
                             </div>
 
@@ -30,7 +67,7 @@ export default function MetamDatas(props) {
                             <div className="row align-items-center">
 
                                 <div className={classNames("col-9", MetamDatasStyle.crypto)}>
-                                 Transaction time : {props.dataTime.result} seconds
+                                 Transaction time : {props.dataTime.result} sec
                                 </div>
                             </div>
 
@@ -43,23 +80,24 @@ export default function MetamDatas(props) {
                                  Fast Gas Price : {props.dataGas.result.FastGasPrice} 
                                 </div>
 
-                                <br></br><br></br>
+                            </div>
 
-                                <div className={classNames("col-9", MetamDatasStyle.crypto)}>
+                        </ListGroup.Item>
+
+                        <ListGroup.Item>
+                        <div className={classNames("col-9", MetamDatasStyle.crypto)}>
                                  Proposed Gas Price : {props.dataGas.result.ProposeGasPrice} 
                                 </div>
+                        </ListGroup.Item>
 
-                                <br></br><br></br>
+                        <ListGroup.Item>
 
-                                <div className={classNames("col-9", MetamDatasStyle.crypto)}>
+                        <div className={classNames("col-9", MetamDatasStyle.crypto)}>
                                  Safe Gas Price : {props.dataGas.result.SafeGasPrice} 
                                 </div>
 
-                                <br></br><br></br>
 
-                                <div>(fee in gwei)</div>
-
-                            </div>
+                                <div className="fee">(fee in gwei)</div>
 
                         </ListGroup.Item>
 

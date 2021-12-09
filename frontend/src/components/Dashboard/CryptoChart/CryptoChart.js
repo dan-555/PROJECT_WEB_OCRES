@@ -107,10 +107,9 @@ useEffect(() => {
                       },
                    
                     },    
-            }  
-            
+            }             
             )
-            
+            console.log(chartInstance);
         }
 
 

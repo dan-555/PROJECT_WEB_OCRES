@@ -1,12 +1,10 @@
 import React, {useState,useEffect} from 'react';
-import  {Card ,ListGroup,Table,Button,Row,Col,Form} from 'react-bootstrap';
+import  {Card ,ListGroup,Table,Row,Col,Form} from 'react-bootstrap';
 import InvestAlertsEditStyle from './InvestAlertsEdit.module.css';
 import classNames from 'classnames';
 import moment from 'moment';
   
 export default function InvestAlertsEdit(props) {
-
-    //var data=props.data;
 
     const [inputTitle, setInputTitle] = useState([]);
     const [inputMessage, setInputMessage] = useState([]);
@@ -33,26 +31,26 @@ export default function InvestAlertsEdit(props) {
 
       useEffect(() => {
     
-        var titles=[];
-        var messages=[];
-        var dates=[];
+            var titles=[];
+            var messages=[];
+            var dates=[];
+            
+            const update = () => {
 
-        console.log(props.data.data);
+            for (var i=0; i<props.data.data.length; i++ )
+            {
+        
+                titles.push(props.data.data[i].title);    
+                messages.push(props.data.data[i].message);   
+                dates.push(defDate(props.data.data[i].alertDate));    
 
-        for (var i=0; i<props.data.data.length; i++ )
-        {
-    
-            titles.push(props.data.data[i].title);    
-            messages.push(props.data.data[i].message);   
-            dates.push(defDate(props.data.data[i].alertDate));    
-
+            }
+            setInputTitle(titles);
+            setInputMessage(messages);
+            setInputDate(dates);
         }
-        setInputTitle(titles);
-        setInputMessage(messages);
-        setInputDate(dates);
-        console.log('rrere')
-
-      },[]);
+        update();
+      });
 
 
 
@@ -121,7 +119,7 @@ export default function InvestAlertsEdit(props) {
                             <td className={classNames(InvestAlertsEditStyle.whiteColor)}> <Form.Control as="textarea"  className={'newMessage'}/></td>  
 
                             <td> 
-                                <input type="date" value={defDate(new Date)}   className={'newDate'}/>
+                                <input type="date" value={defDate(new Date())}   className="newDate"/>
                             </td>
 
                             <td  className={classNames(InvestAlertsEditStyle.tdStyle,InvestAlertsEditStyle.whiteColor)}>                                   
@@ -142,7 +140,7 @@ export default function InvestAlertsEdit(props) {
                             <td className={classNames(InvestAlertsEditStyle.whiteColor)}> <Form.Control  onChange={onChangeHandler} value={inputMessage[index]} name={"message"+alert._id} className={"message"+alert._id} as="textarea" /></td>  
 
                             <td> 
-                                <input type="date" value={new Date()} onChange={onChangeHandler} value={inputDate[index]} name={"date"+alert._id} className={"date"+alert._id}/>
+                                <input type="date" onChange={onChangeHandler} value={inputDate[index]} name={"date"+alert._id} className={"date"+alert._id}/>
                             </td>
 
                             <td  className={classNames(InvestAlertsEditStyle.tdStyle,InvestAlertsEditStyle.whiteColor)}>                                   

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json());
 
 mongoose.connect('mongodb+srv://Admin:Admin@cluster0.mitte.mongodb.net/ocres-web', {

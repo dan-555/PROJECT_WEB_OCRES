@@ -3,9 +3,6 @@ import './Header.css';
 import  {Navbar,Container} from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
-import Logo from '../../imgs/logo.png';
-console.log(Logo);
-
 function Header() {
   return (
 

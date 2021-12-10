@@ -2,7 +2,6 @@ import React, {useState,useEffect} from 'react';
 import  {Card ,ListGroup,Table,Row,Col,Form} from 'react-bootstrap';
 import InvestAlertsEditStyle from './InvestAlertsEdit.module.css';
 import classNames from 'classnames';
-import "react-datetime/css/react-datetime.css";
 import {
     DateTimePicker,
   } from "react-tempusdominus-bootstrap";

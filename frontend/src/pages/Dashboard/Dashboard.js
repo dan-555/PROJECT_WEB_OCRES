@@ -49,7 +49,7 @@ export default function Widgets() {
            
                 </Masonry>
 
-     </div>
+     </div> 
 </div>
         )
 }

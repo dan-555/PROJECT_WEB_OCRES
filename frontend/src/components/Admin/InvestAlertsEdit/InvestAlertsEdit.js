@@ -12,8 +12,10 @@ export default function InvestAlertsEdit(props) {
     const [inputTitle, setInputTitle] = useState([]);
     const [inputMessage, setInputMessage] = useState([]);
     
-    const [updatedDate, setUpdatedDate] = useState();
+   // const [updatedDate, setUpdatedDate] = useState();
     const [addedDate, setAddedDate] = useState(new Date());
+    //const [addedDate, setAddedDate] = useState([]);
+    const [updatedDates, setUpdatedDates] = useState([]);
 
   
     function onChangeHandler(event) 
@@ -23,13 +25,12 @@ export default function InvestAlertsEdit(props) {
 
       };
 
-      
-      
       useEffect(() => {
     
             var titles=[];
             var messages=[];
-            
+            var updateDates=[];
+
             function setIntputs() {
 
                 for (var i=0; i<props.data.data.length; i++ )
@@ -37,30 +38,29 @@ export default function InvestAlertsEdit(props) {
                         
                                 titles.push(props.data.data[i].title);    
                                 messages.push(props.data.data[i].message);   
-
+                                updateDates.push(props.data.data[i].alertDate)
                             }
                             setInputTitle(titles);
                             setInputMessage(messages);
+                            setUpdatedDates(updateDates);
                     }
 
-         console.log(updatedDate);
             setIntputs();
-      },[props.data.data,updatedDate]);
+      },[props.data.data]);
 
 
-
-   function updateA(id)
+   function updateA(id,index)
    {
        var titre = document.getElementsByClassName("title"+id)[0].value;
        var message = document.getElementsByClassName("message"+id)[0].value;
      
        
-       var newDate= new Date (updatedDate);
-        console.log(newDate);
+      var newDate= new Date (updatedDates[index]);
+       console.log(newDate);
 
       props.updateAlert(id,titre,message,newDate);
 
-      window.location.reload(false);  
+       window.location.reload(false);  
        alert("Alerte mise à jour")
    }
 
@@ -138,11 +138,11 @@ export default function InvestAlertsEdit(props) {
 
                             <td> 
                             <span style={ {display: "none"}} className={"date"+alert._id}>{alert.alertDate}</span>        
-                                <DateTimePicker onChange={e => setUpdatedDate(e.date)} locale="fr" defaultDate={new Date(alert.alertDate)} />
+                                <DateTimePicker onChange={e => setUpdatedDates(datas=>({...datas, [index]: e.date }))} locale="fr" defaultDate={new Date(alert.alertDate)} />
                             </td>
                             <td  className={classNames(InvestAlertsEditStyle.tdStyle,InvestAlertsEditStyle.whiteColor)}>                                   
                                 <Row>
-                                    <Col><button onClick={() => updateA(alert._id)} type="button" className="btn">Update</button></Col>
+                                    <Col><button onClick={() => updateA(alert._id,index)} type="button" className="btn">Update</button></Col>
                                     <Col><button onClick={() => deleteA(alert._id)} type="button" className="btn">Delete</button></Col>
                                 </Row>
                             </td>

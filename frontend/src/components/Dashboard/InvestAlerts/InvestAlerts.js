@@ -14,7 +14,7 @@ export default function InvestAlerts(props) {
 
        function defDate(dateString)
       {
-           var dateSTR= moment(new Date(dateString)).format('LL');
+           var dateSTR= moment(new Date(dateString)).format('llll');
    
        return dateSTR;
    

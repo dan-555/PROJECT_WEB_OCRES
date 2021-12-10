@@ -2,55 +2,51 @@ import React, {useState,useEffect} from 'react';
 import  {Card ,ListGroup,Table,Row,Col,Form} from 'react-bootstrap';
 import InvestAlertsEditStyle from './InvestAlertsEdit.module.css';
 import classNames from 'classnames';
-import moment from 'moment';
+import "react-datetime/css/react-datetime.css";
+import {
+    DateTimePicker,
+  } from "react-tempusdominus-bootstrap";
   
+
 export default function InvestAlertsEdit(props) {
 
     const [inputTitle, setInputTitle] = useState([]);
     const [inputMessage, setInputMessage] = useState([]);
-    const [inputDate, setInputDate] = useState([]);
+    
+    const [updatedDate, setUpdatedDate] = useState();
+    const [addedDate, setAddedDate] = useState(new Date());
 
-  
   
     function onChangeHandler(event) 
     {
         setInputTitle({[event.target.name]: event.target.value});
         setInputMessage({[event.target.name]: event.target.value});
-        setInputDate({[event.target.name]: event.target.value});
 
       };
 
-      function defDate(dateString)
-      {
-           var dateSTR= moment(new Date(dateString)).toISOString();
-           var NVdate= dateSTR.substring(0, 10);
-   
-       return NVdate;
-   
-      }
-
+      
+      
       useEffect(() => {
     
             var titles=[];
             var messages=[];
-            var dates=[];
             
-            const update = () => {
+            function setIntputs() {
 
-            for (var i=0; i<props.data.data.length; i++ )
-            {
-        
-                titles.push(props.data.data[i].title);    
-                messages.push(props.data.data[i].message);   
-                dates.push(defDate(props.data.data[i].alertDate));    
+                for (var i=0; i<props.data.data.length; i++ )
+                            {
+                        
+                                titles.push(props.data.data[i].title);    
+                                messages.push(props.data.data[i].message);   
 
-            }
-            setInputTitle(titles);
-            setInputMessage(messages);
-            setInputDate(dates);
-        }
-        update();
-      });
+                            }
+                            setInputTitle(titles);
+                            setInputMessage(messages);
+                    }
+
+         console.log(updatedDate);
+            setIntputs();
+      },[props.data.data,updatedDate]);
 
 
 
@@ -58,13 +54,15 @@ export default function InvestAlertsEdit(props) {
    {
        var titre = document.getElementsByClassName("title"+id)[0].value;
        var message = document.getElementsByClassName("message"+id)[0].value;
-       var date = document.getElementsByClassName("date"+id)[0].value;
-        var newDate= new Date (date);
-    
-        props.updateAlert(id,titre,message,newDate);
+     
+       
+       var newDate= new Date (updatedDate);
+        console.log(newDate);
 
-        window.location.reload(false);  
-        alert("Alerte mise à jour")
+      props.updateAlert(id,titre,message,newDate);
+
+      window.location.reload(false);  
+       alert("Alerte mise à jour")
    }
 
    function deleteA(id)
@@ -80,15 +78,15 @@ export default function InvestAlertsEdit(props) {
  {
     var titre = document.getElementsByClassName("newTitle")[0].value;
     var message = document.getElementsByClassName("newMessage")[0].value;
-    var date = document.getElementsByClassName("newDate")[0].value;
-    var newDate= new Date (date);
- 
+    
+    var newDate= new Date (addedDate);
+    console.log(newDate);
+
+
    props.addAlert(titre,message,newDate);
    window.location.reload(false);
 
    alert("Alerte ajoutée");
-
-
 
  }
    return( 
@@ -119,7 +117,7 @@ export default function InvestAlertsEdit(props) {
                             <td className={classNames(InvestAlertsEditStyle.whiteColor)}> <Form.Control as="textarea"  className={'newMessage'}/></td>  
 
                             <td> 
-                                <input type="date" value={defDate(new Date())}   className="newDate"/>
+                            <DateTimePicker onChange={e => setAddedDate(e.date)} locale="fr" defaultDate={addedDate} />
                             </td>
 
                             <td  className={classNames(InvestAlertsEditStyle.tdStyle,InvestAlertsEditStyle.whiteColor)}>                                   
@@ -140,9 +138,9 @@ export default function InvestAlertsEdit(props) {
                             <td className={classNames(InvestAlertsEditStyle.whiteColor)}> <Form.Control  onChange={onChangeHandler} value={inputMessage[index]} name={"message"+alert._id} className={"message"+alert._id} as="textarea" /></td>  
 
                             <td> 
-                                <input type="date" onChange={onChangeHandler} value={inputDate[index]} name={"date"+alert._id} className={"date"+alert._id}/>
+                            <span style={ {display: "none"}} className={"date"+alert._id}>{alert.alertDate}</span>        
+                                <DateTimePicker onChange={e => setUpdatedDate(e.date)} locale="fr" defaultDate={new Date(alert.alertDate)} />
                             </td>
-
                             <td  className={classNames(InvestAlertsEditStyle.tdStyle,InvestAlertsEditStyle.whiteColor)}>                                   
                                 <Row>
                                     <Col><button onClick={() => updateA(alert._id)} type="button" className="btn">Update</button></Col>

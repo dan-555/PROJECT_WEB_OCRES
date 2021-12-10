@@ -14,7 +14,6 @@ router.get('/', async (req, res) => {
 
 
 // Update by ID
-
 router.put("/update", async (req, res) => {
   
   const id = req.body.id;
@@ -28,6 +27,7 @@ router.put("/update", async (req, res) => {
               title :title,
               message : message,
               alertDate : date,
+              
     });
     console.log(result);
  
@@ -37,6 +37,36 @@ router.put("/update", async (req, res) => {
     }
  
 });
+  router.put("/update/:id", async (req, res) => {
+    const id=req.params.id;
+  
+    const alert = {
+      title :req.body.title,
+      message : req.body.message,
+      alertDate : req.body.alertDate,
+
+   }
+   console.log(alert);
+
+               AlertModel.findByIdAndUpdate(id, alert, function(err){
+                if(err){
+
+                console.log(err);
+                res.json(err);
+              
+              } else {
+                  res.json("udpdate");
+
+                }
+             });
+
+        
+    });
+
+
+
+
+
 
 //delete by id
 

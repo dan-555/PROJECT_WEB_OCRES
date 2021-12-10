@@ -21,8 +21,6 @@ export default function Informations() {
         
     },[])
 
-
-    console.log("test");
        if (data===undefined) //Si tableau vide cad api pas encore fetch
           return <div>Loading...</div>;
        else if (data.length===0)

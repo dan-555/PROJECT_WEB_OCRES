@@ -56,12 +56,17 @@ export default function Metamask() {
         const ETHDataTime =  `https://api.etherscan.io/api?module=gastracker&action=gasestimate&gasprice=2000000000&apikey=HBE5A1TV3KITG8W1FNZSSHFVI8DE3FM8XQ`;
         
         const getETHBalance = axios.get(ETHBalance);
+
+
+
+
+
+        
         const getETHGas = axios.get(ETHGas);
         const getETHDataTime = axios.get(ETHDataTime);
     
         axios.all([getETHBalance,getETHGas,getETHDataTime]).then(
             axios.spread((...allData) => {
-    
                 const allDataETHBalance = allData[0];
                 const allDataETHGas = allData[1];
                 const allDataETHDataTime = allData[2];

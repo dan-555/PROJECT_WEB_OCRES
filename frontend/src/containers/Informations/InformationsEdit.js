@@ -22,20 +22,18 @@ export default function InformationsEdit() {
         
     },[])
 
-    const updateAlert = async (id,titre,message,date) => {
-        
-        const response = await axios.put('http://localhost:1337/alerts/update', {  
-            id : id,
-            title : titre,
+      const updateAlert = async (id,titre,message,date) => {
+
+        var alert = {
+
+            title :titre,
             message : message,
             alertDate : date,
-        }
-        )
-        .catch((error) => console.log(error.resp));
+        };
+        const response = await axios.put(`http://localhost:1337/alerts/update/${id}`, alert)
         console.log(response);
 
       };
-    
       const deleteAlert = async (id) => {
         
                const response = await axios.delete(`http://localhost:1337/alerts/delete/${id}`)  

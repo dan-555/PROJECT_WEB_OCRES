@@ -3,7 +3,6 @@ var router = express.Router();
 const AlertModel = require('../models/alert.model');
 const moment = require('moment')
 
-
 //GET meetings listing. //
 router.get('/', async (req, res) => {  
  

@@ -10,10 +10,6 @@ export default function AdminControl() {
         <div className="">
             <div className="container">
             <InformationsEdit/>
-             
-             
-             
-
      </div>
 </div>
         )
